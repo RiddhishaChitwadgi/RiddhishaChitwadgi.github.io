@@ -161,7 +161,7 @@ function initTypingAnimation() {
     if (!typingText) return;
     
     const titles = [
-        'Data Engineer',
+        'Data Nerd',
         'Analytics Expert',
         'SQL Developer',
         'Python Developer',
@@ -971,7 +971,75 @@ function initModal() {
     `;
     document.head.appendChild(focusStyle);
 })();
+// ============================================
+// Contact Form with Formspree
+// ============================================
+function initContactForm() {
+    const form = document.getElementById('contact-form');
+    
+    if (!form) return;
+    
+    // Replace with your Formspree endpoint
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xzdajqnr';
+    
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        
+        // Validate form
+        if (!data.name || !data.email || !data.subject || !data.message) {
+            showNotification('Please fill in all fields', 'error');
+            return;
+        }
+        
+        if (!isValidEmail(data.email)) {
+            showNotification('Please enter a valid email address', 'error');
+            return;
+        }
+        
+        // Submit to Formspree
+        const submitBtn = form.querySelector('.btn-submit');
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        try {
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            
+            if (response.ok) {
+                showNotification('Message sent successfully!', 'success');
+                form.reset();
+            } else {
+                throw new Error('Failed to send message');
+            }
+        } catch (error) {
+            // Fallback: Open email client
+            const subject = encodeURIComponent(data.subject);
+            const body = encodeURIComponent(`Hi Riddhisha,\n\n${data.message}\n\nBest regards,\n${data.name}`);
+            window.location.href = `mailto:riddhishachitwadgi@gmail.com?subject=${subject}&body=${body}`;
+            showNotification('Opening email client...', 'info');
+        }
+        
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
+}
 
+// Email validation helper
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 // ============================================
 // Console Welcome Message
 // ============================================
