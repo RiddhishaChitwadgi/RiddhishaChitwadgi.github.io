@@ -25,7 +25,11 @@ A professional, interactive portfolio website showcasing my work as a Data Engin
 - **Google Fonts**: Inter and Playfair Display fonts
 
 ## 📂 Project Structure
-portfolio/ ├── index.html # Main HTML file ├── styles.css # All styles ├── script.js # JavaScript functionality └── README.md # This file
+portfolio/
+├── index.html      # Main HTML file
+├── styles.css      # All styles
+├── script.js       # JavaScript functionality
+└── README.md       # This file
 
 
 ## 🚀 Getting Started
