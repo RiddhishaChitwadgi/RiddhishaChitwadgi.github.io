@@ -2,7 +2,7 @@
 
 A professional, interactive portfolio website showcasing my work as a Data Engineer and Analyst.
 
-![Portfolio Preview](https://via.placeholder.com/1200x600/1a1a1a/ffffff?text=Riddhisha+Chitwadgi+Portfolio)
+![Portfolio Preview](https://via.placeholder.com/1200x600/https://riddhishachitwadgi.github.io/)
 
 ## 🌟 Features
 
